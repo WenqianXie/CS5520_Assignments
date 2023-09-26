@@ -1,6 +1,7 @@
 import { View, Text, TextInput, StyleSheet, Checkbox, Button} from 'react-native'
 import { useState } from 'react'
 import Header from '../components/Header';
+import { validateName, validateEmail, validatePhone } from '../Utils/validation';
 
 export default function Starting () {
   const [userName, setUserName] = useState(""); // User enter name
@@ -13,39 +14,40 @@ export default function Starting () {
   const [emailError, setEmailError] = useState(""); // emailError message
   const [phoneError, setPhoneError] = useState(""); //phoneError message
 
-  const validateName = (name) =>{
-    if (name.length < 2 || !isNaN(name)){
-        return false;
-    }
-    return true;
-  } // validate if a user name is valid (length must be more than 1 and must not be number)
+  // const validateName = (name) =>{
+  //   if (name.length < 2 || !isNaN(name)){
+  //       return false;
+  //   }
+  //   return true;
+  // } // validate if a user name is valid (length must be more than 1 and must not be number)
 
-  const validateEmail = (email) => {
-    const emailPattern = /\S+@\S+\.\S+/;
-    return emailPattern.test(email);
-  } // validate if a user email is valid, using regular expression 
+  // const validateEmail = (email) => {
+  //   const emailPattern = /\S+@\S+\.\S+/;
+  //   return emailPattern.test(email);
+  // } // validate if a user email is valid, using regular expression 
 
-  const validatePhone = (phone) => {
-    if (phone.length !== 10 || isNaN(phone)){
-        return false;
-    }
-    return true;
-  }; // validate if a phone number is valid (length must be 10 and must be numbers)
+  // const validatePhone = (phone) => {
+  //   if (phone.length !== 10 || isNaN(phone)){
+  //       return false;
+  //   }
+  //   return true;
+  // }; // validate if a phone number is valid (length must be 10 and must be numbers)
 
   const startHandler = () => {
     const isValid = true;
     if (!validateName(userName)){
-        // isValid = false;
+        isValid = false;
         setNameError("Please enter a valid name.")
     }
     if (!validateEmail(userEmail)){
-        // isValid = false;
+        isValid = false;
         setEmailError("Please enter a valid email.")
     }
     if (!validatePhone(userPhone)){
-        // isValid = false;
+        isValid = false;
         setPhoneError("Please enter a valid phone.")
     }
+    props.onStart(userName, userEmail, userPhone);
   }; // if the input fields are not correct, set error messages
 
   const resetHandler = () => {
@@ -116,10 +118,13 @@ const styles = StyleSheet.create({
     input: {
       color: "#6B0F4D",
       borderBottomColor: "#6B0F4D",
-      borderBottomWidth: 2,
+      borderBottomWidth: 3,
       width: 300,
-      alignSelf: 'center',
-      fontSize: 18,
+      // alignSelf: 'center',
+      fontSize: 20,
+      textAlign: "center",
+      paddingBottom: 5,
+      fontWeight: 'bold',
     },
 
     buttonContainer: {
