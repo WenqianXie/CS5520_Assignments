@@ -4,16 +4,22 @@ import React from 'react'
 export default function Header() {
   return (
     <View style = {styles.header}>
-      <Text>Welcome</Text>
-    </View>
+      <Text style={styles.headerText}>Welcome</Text>    
+      </View>
   )
 };
 
 const styles = StyleSheet.create({
     header: {
-        fontSize: 50, // Adjust the font size as needed
+        fontSize: 100, // Adjust the font size as needed
         color: 'blue',
         fontWeight: 'bold',
-        marginBottom: 20, // Add margin to separate the header from content
+        marginBottom: 100, // Add margin to separate the header from content
+      },
+    headerText: {
+        fontSize: 24, // Adjust the font size as needed
+        color: 'blue',
+        fontWeight: 'bold',
+        textAlign: 'center',
       },
 })

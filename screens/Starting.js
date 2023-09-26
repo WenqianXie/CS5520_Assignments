@@ -1,9 +1,10 @@
-import { View, Text, TextInput, StyleSheet, Checkbox, Button} from 'react-native'
+import { View, Text, TextInput, StyleSheet, Button} from 'react-native'
 import { useState } from 'react'
+import Checkbox from 'expo-checkbox';
 import Header from '../components/Header';
 import { validateName, validateEmail, validatePhone } from '../Utils/validation';
 
-export default function Starting () {
+export default function Starting ({start}) {
   const [userName, setUserName] = useState(""); // User enter name
   const [userEmail, setUserEmail] = useState(""); // User enter email
   const [userPhone, setUserPhone] = useState(""); // User enter phone
@@ -14,40 +15,23 @@ export default function Starting () {
   const [emailError, setEmailError] = useState(""); // emailError message
   const [phoneError, setPhoneError] = useState(""); //phoneError message
 
-  // const validateName = (name) =>{
-  //   if (name.length < 2 || !isNaN(name)){
-  //       return false;
-  //   }
-  //   return true;
-  // } // validate if a user name is valid (length must be more than 1 and must not be number)
-
-  // const validateEmail = (email) => {
-  //   const emailPattern = /\S+@\S+\.\S+/;
-  //   return emailPattern.test(email);
-  // } // validate if a user email is valid, using regular expression 
-
-  // const validatePhone = (phone) => {
-  //   if (phone.length !== 10 || isNaN(phone)){
-  //       return false;
-  //   }
-  //   return true;
-  // }; // validate if a phone number is valid (length must be 10 and must be numbers)
-
   const startHandler = () => {
-    const isValid = true;
     if (!validateName(userName)){
-        isValid = false;
         setNameError("Please enter a valid name.")
+        return false;
     }
     if (!validateEmail(userEmail)){
-        isValid = false;
         setEmailError("Please enter a valid email.")
+        return false;
     }
     if (!validatePhone(userPhone)){
-        isValid = false;
         setPhoneError("Please enter a valid phone.")
+        return false;
     }
-    props.onStart(userName, userEmail, userPhone);
+    start({ userName, userEmail, userPhone });
+    setNameError("");
+    setEmailError("");
+    setPhoneError("");
   }; // if the input fields are not correct, set error messages
 
   const resetHandler = () => {
@@ -87,32 +71,37 @@ export default function Starting () {
             keyboardType="numeric"/>
             {phoneError && <Text>{phoneError}</Text>}
         
-            {/* <Checkbox
+          <View style={styles.checkboxContainer}>
+            <Checkbox 
             value={isChecked}
             onValueChange={setIsChecked}/>
-            <Text style={styles.label}>I am not a robot</Text> */}
-          <View style = {styles.buttonContainer}>
-            <Button 
-              title = "Reset"
-              onPress={resetHandler}/>
-
-              <Button 
-              title = "Start"
-              onPress={startHandler}/>
-              {/* disabled = {!isChecked}  */}
+            <Text style={styles.label}>I am not a robot</Text>
             </View>
             
-          </View>
+          <View style = {styles.buttonContainer}>
+            <View style={styles.reset}>
+            <Button
+              title = "Reset"
+              onPress={resetHandler}/>
+            </View>
+            <View style={styles.start}>
+              <Button  
+              title = "Start"
+              onPress={startHandler}
+              disabled = {!isChecked}/>
+              </View>
+            </View>
+          </View> 
         </View>
   );}
 
 
 const styles = StyleSheet.create({
     label: {
-        marginTop: 20,
-        color: "purple",
-        fontSize: 25,
-        marginVertical: 8,
+      marginTop: 20,
+      color: "purple",
+      fontSize: 25,
+      marginVertical: 8,
     },
 
     input: {
@@ -136,13 +125,36 @@ const styles = StyleSheet.create({
     },
 
     container: {
-      width: '80%', // Set the width to take 80% of the screen width
+      width: '100%', // Set the width to take 80% of the screen width
       height: 500, 
       backgroundColor: '#CCCCCC', // Set the background color to grey
       padding: 20, // Add some padding to the content inside the container
-      alignItems: 'flex-start', // Align content to the left
-      justifyContent: 'flex-start',
+      // alignItems: 'flex-start', // Align content to the left
+      // justifyContent: 'flex-start',
       marginTop: 20,
-    }
+      shadowColor: "#000000",
+      shadowOffset: { width : 0, height : 2},
+      shadowRadius: 6,
+      borderRadius: 15,
+    },
+
+    checkboxContainer: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "center",
+      marginTop: 20,
+    },
+
+    reset: {
+      color: "#ED33FF",
+      fontWeight: "bold",
+      fontSize: 24,
+    },
+
+    start: {
+      color: "#337EFF",
+      fontWeight: "bold",
+      fontSize: 24,
+    },
 
 });

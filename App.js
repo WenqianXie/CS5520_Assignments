@@ -2,34 +2,36 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import Starting from './screens/Starting';
 import { useState } from 'react';
-import LinearGradient from 'react-native-linear-gradient';
 import { validateName, validateEmail, validatePhone } from './Utils/validation';
 import Confirm from './screens/Confirm';
 import { colors } from './Utils/styles';
-
+import Header from './components/Header';
 
 export default function App() {
-  const[currentScreen, setCurrentScreen] = useState("Starting");
-  // const[userData, setUserData] = useState("", "", "");
+  const [userData, setUserInfo] = useState({
+    userName: "abc",
+    userEmail: "123@123.com",
+    userPhone: 1234567890,
+  });
 
-  const startHandler = (name, email, phone) =>{
-    if (validateName(name) && validateEmail(email) && validatePhone(phone)){
-      // setUserData( { name, email, phone } );
-      setCurrentScreen("Confirm")
-    } else {console.log("Validation failed.")}
-  };
+  const [modalVisible, setModalVisible] = useState(false);
+
+  function makeModalVisible(){
+    setModalVisible(true);
+  }
+
+  function makeModalInvisible(){
+    setModalVisible(false);
+  }
+
+  function start(){
+    setModalVisible(true);
+  }
+
   return (
     <View style = {styles.container}>
-      {/* <LinearGradient
-        colors={['#0000FF', '#800080']} // Blue to Purple gradient
-        style={styles.gradient}
-      > */}
-      {currentScreen === 'Starting' && <Starting onStart={startHandler} />}
-      {currentScreen === 'Confirm' && <Confirm />} 
-      
-     {/* </LinearGradient> */}
+      <Confirm/>
     </View>
-
   );
 }
 
@@ -43,4 +45,5 @@ const styles = StyleSheet.create({
   gradient: {
     flex: 1,
   },
+
 });
