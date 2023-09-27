@@ -4,10 +4,10 @@ import Checkbox from 'expo-checkbox';
 import Header from '../components/Header';
 import { validateName, validateEmail, validatePhone } from '../Utils/validation';
 
-export default function Starting ({start}) {
-  const [userName, setUserName] = useState(""); // User enter name
-  const [userEmail, setUserEmail] = useState(""); // User enter email
-  const [userPhone, setUserPhone] = useState(""); // User enter phone
+export default function Starting ({userName, setUserName, userEmail, setUserEmail, userPhone,setUserPhone, start}) {
+  // const [userName, setUserName] = useState(""); // User enter name
+  // const [userEmail, setUserEmail] = useState(""); // User enter email
+  // const [userPhone, setUserPhone] = useState(""); // User enter phone
 
   const [isChecked, setIsChecked] = useState(false); // checkbox status, default set to not checked
 
@@ -15,7 +15,7 @@ export default function Starting ({start}) {
   const [emailError, setEmailError] = useState(""); // emailError message
   const [phoneError, setPhoneError] = useState(""); //phoneError message
 
-  const startHandler = () => {
+  const startHandler = (userName, userEmail, userPhone) => {
     if (!validateName(userName)){
         setNameError("Please enter a valid name.")
         return false;
@@ -28,10 +28,13 @@ export default function Starting ({start}) {
         setPhoneError("Please enter a valid phone.")
         return false;
     }
-    start({ userName, userEmail, userPhone });
-    setNameError("");
-    setEmailError("");
-    setPhoneError("");
+    start();
+    // setNameError("");
+    // setEmailError("");
+    // setPhoneError("");
+    setUserName(userName);
+    setUserEmail(userEmail);
+    setUserPhone(userPhone);
   }; // if the input fields are not correct, set error messages
 
   const resetHandler = () => {

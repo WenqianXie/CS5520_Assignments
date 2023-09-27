@@ -1,7 +1,7 @@
-import { View, Text, Modal, StyleSheet } from 'react-native'
+import { View, Text, Modal, StyleSheet, Button } from 'react-native'
 import React from 'react'
 
-export default function Confirm({userData, modalVisible, makeModalInvisible}) {
+export default function Confirm({userName, userEmail, userPhone, modalVisible, makeModalInvisible, continueToGame}) {
 
   function goBackHandler(){
     makeModalInvisible();
@@ -9,6 +9,7 @@ export default function Confirm({userData, modalVisible, makeModalInvisible}) {
 
   function continueHandler(){
     makeModalInvisible();
+    continueToGame();
   }
   return (
     <Modal
@@ -17,10 +18,10 @@ export default function Confirm({userData, modalVisible, makeModalInvisible}) {
       visible={modalVisible}>
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-        <Text style={styles.textStyle}>Hello {userData.userName}!</Text>
+        <Text style={styles.textStyle}>Hello {userName}!</Text>
         <Text style={styles.textStyle}>Please confirm the following information is correct by pressing the continue button</Text>
-        <Text style={styles.textInfoStyle}>{userData.userEmail}</Text>
-          <Text style={styles.textInfoStyle}>{userData.userPhone}</Text>
+        <Text style={styles.textInfoStyle}>{userEmail}</Text>
+          <Text style={styles.textInfoStyle}>{userPhone}</Text>
           <View style={styles.modalButton}>
             <View style={styles.gpBack}>
             <Button title = "Go Back" onPress={goBackHandler}/>
