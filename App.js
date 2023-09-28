@@ -6,6 +6,7 @@ import { colors } from "./Utils/Helper";
 import Game from "./screens/Game";
 import { LinearGradient } from "expo-linear-gradient";
 import { appStyles } from "./Utils/Helper";
+//this is app.js, main entry point
 
 export default function App() {
   const [userData, setUserInfo] = useState({
