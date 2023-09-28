@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
-import { headerStyles } from "../Utils/Helper";
+import { headerStyles } from "../utils/Helper";
 
 export default function Header() {
   return (

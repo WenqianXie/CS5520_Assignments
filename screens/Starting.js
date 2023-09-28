@@ -6,8 +6,8 @@ import {
   validateName,
   validateEmail,
   validatePhone,
-} from "../Utils/Validation";
-import { startingStyles, colors } from "../Utils/Helper";
+} from "../utils/Validation";
+import { startingStyles, colors } from "../utils/Helper";
 // this is the starting screen for the user to input the name, email and phone, validate them and show error messages
 
 export default function Starting({ start }) {

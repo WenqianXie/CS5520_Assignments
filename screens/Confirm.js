@@ -1,6 +1,6 @@
 import { View, Text, Modal, Button } from "react-native";
 import React from "react";
-import { confirmStyles } from "../Utils/Helper";
+import { confirmStyles } from "../utils/Helper";
 // this is a modal that shows the user data, user can choose to go back to sign up or continue to game
 
 export default function Confirm({
