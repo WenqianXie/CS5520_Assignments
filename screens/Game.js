@@ -8,6 +8,7 @@ import {
   SafeAreaView,
 } from "react-native";
 import React, { useState } from "react";
+import { gameStyles } from "../Utils/Helper";
 
 export default function Game({ reset, logOutToStart }) {
   function getRandomInt(min, max) {
@@ -56,24 +57,24 @@ export default function Game({ reset, logOutToStart }) {
 
   return (
     <SafeAreaView>
-      <View style={styles.logOutContainer}>
+      <View style={gameStyles.logOutContainer}>
         <Button title="Log Out" onPress={logOutHandler} />
       </View>
       <View
         style={[
-          styles.container,
+          gameStyles.container,
           { display: stage === "guess" ? "flex" : "none" },
         ]}
       >
-        <Text style={styles.label}>Guess A Number Between 10 & 20</Text>
-        <View style={styles.userContainer}>
-          <Text style={styles.enterNumber}>Enter a Number</Text>
+        <Text style={gameStyles.label}>Guess A Number Between 10 & 20</Text>
+        <View style={gameStyles.userContainer}>
+          <Text style={gameStyles.enterNumber}>Enter a Number</Text>
           <TextInput
-            style={styles.input}
+            style={gameStyles.input}
             value={enteredNumber}
             onChangeText={(text) => setEnteredNumber(text)}
           />
-          <View style={styles.buttonContainer}>
+          <View style={gameStyles.buttonContainer}>
             <Button title="Reset" onPress={resetHandler} color="red" />
             <Button title="Confirm" onPress={confirmHandler} />
           </View>
@@ -82,20 +83,22 @@ export default function Game({ reset, logOutToStart }) {
 
       <View
         style={[
-          styles.container,
+          gameStyles.container,
           { display: stage === "sucess" ? "flex" : "none" },
         ]}
       >
-        <View style={styles.userContainer}>
-          <Text style={styles.label}>You guessed correct!</Text>
-          <Text style={styles.label}>Number of guesses: {guessCount + 1}</Text>
+        <View style={gameStyles.userContainer}>
+          <Text style={gameStyles.label}>You guessed correct!</Text>
+          <Text style={gameStyles.label}>
+            Number of guesses: {guessCount + 1}
+          </Text>
           <Image
             source={{
               uri: `https://picsum.photos/id/${guessNumber}/100/100`,
             }}
-            style={styles.image}
+            style={gameStyles.image}
           ></Image>
-          <View style={styles.buttonContainer}>
+          <View style={gameStyles.buttonContainer}>
             <Button title="New Game" onPress={newGameHandler} />
           </View>
         </View>
@@ -103,17 +106,17 @@ export default function Game({ reset, logOutToStart }) {
 
       <View
         style={[
-          styles.container,
+          gameStyles.container,
           { display: stage === "failure" ? "flex" : "none" },
         ]}
       >
-        <View style={styles.userContainer}>
-          <Text style={styles.label}>You didn't guess correct!</Text>
+        <View style={gameStyles.userContainer}>
+          <Text style={gameStyles.label}>You didn't guess correct!</Text>
           <Image
             source={require("../assets/wrongGuess.jpg")}
-            style={styles.image}
+            style={gameStyles.image}
           />
-          <View style={styles.buttonContainer}>
+          <View style={gameStyles.buttonContainer}>
             <Button title="Try again" onPress={tryAgainHandler} />
           </View>
         </View>
@@ -122,111 +125,111 @@ export default function Game({ reset, logOutToStart }) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-    shadowColor: "#000000",
-    shadowRadius: 6,
-    borderRadius: 15,
+// const styles = StyleSheet.create({
+//   container: {
+//     justifyContent: "center",
+//     alignItems: "center",
+//     padding: 20,
+//     shadowColor: "#000000",
+//     shadowRadius: 6,
+//     borderRadius: 15,
 
-    // marginTop: 40, // Add some padding to the content inside the container
-  },
-  userContainer: {
-    width: "100%", // Set the width to take 80% of the screen width
-    height: 400,
-    backgroundColor: "#CCCCCC", // Set the background color to grey
-    marginTop: 20,
-    padding: 20, // Add some padding to the content inside the container
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowRadius: 6,
-    borderRadius: 20,
-  },
-  enterNumber: {
-    marginTop: 20,
-    color: "blue",
-    fontSize: 24,
-    marginVertical: 8,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  label: {
-    marginTop: 30,
-    color: "blue",
-    fontSize: 24,
-    marginVertical: 8,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  desc: {
-    color: "purple",
-    marginLeft: 12,
-  },
-  input: {
-    color: "#6B0F4D",
-    borderBottomColor: "#6B0F4D",
-    borderBottomWidth: 5,
-    width: 100,
-    alignSelf: "center",
-    fontSize: 20,
-    textAlign: "center",
-    paddingBottom: 10,
-    fontWeight: "bold",
-    marginTop: 20,
-  },
-  buttonContainer: {
-    //   display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-around",
-    padding: 20,
-  },
-  logOut: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-around",
-  },
-  desc: {
-    color: "purple",
-    marginLeft: 12,
-  },
-  checkboxContainer: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    marginTop: 20,
-  },
-  error: {
-    color: "#7F848E",
-    fontWeight: "bold",
-    fontSize: 18,
-  },
-  reset: {
-    color: "#ED33FF",
-    fontWeight: "bold",
-    fontSize: 24,
-  },
-  start: {
-    color: "#337EFF",
-    fontWeight: "bold",
-    fontSize: 24,
-  },
+//     // marginTop: 40, // Add some padding to the content inside the container
+//   },
+//   userContainer: {
+//     width: "100%", // Set the width to take 80% of the screen width
+//     height: 400,
+//     backgroundColor: "#CCCCCC", // Set the background color to grey
+//     marginTop: 20,
+//     padding: 20, // Add some padding to the content inside the container
+//     shadowOffset: {
+//       width: 0,
+//       height: 2,
+//     },
+//     shadowRadius: 6,
+//     borderRadius: 20,
+//   },
+//   enterNumber: {
+//     marginTop: 20,
+//     color: "blue",
+//     fontSize: 24,
+//     marginVertical: 8,
+//     fontWeight: "bold",
+//     textAlign: "center",
+//   },
+//   label: {
+//     marginTop: 30,
+//     color: "blue",
+//     fontSize: 24,
+//     marginVertical: 8,
+//     fontWeight: "bold",
+//     textAlign: "center",
+//   },
+//   desc: {
+//     color: "purple",
+//     marginLeft: 12,
+//   },
+//   input: {
+//     color: "#6B0F4D",
+//     borderBottomColor: "#6B0F4D",
+//     borderBottomWidth: 5,
+//     width: 100,
+//     alignSelf: "center",
+//     fontSize: 20,
+//     textAlign: "center",
+//     paddingBottom: 10,
+//     fontWeight: "bold",
+//     marginTop: 20,
+//   },
+//   buttonContainer: {
+//     //   display: "flex",
+//     flexDirection: "row",
+//     alignItems: "center",
+//     justifyContent: "space-around",
+//     padding: 20,
+//   },
+//   logOut: {
+//     flex: 1,
+//     flexDirection: "row",
+//     alignItems: "center",
+//     justifyContent: "space-around",
+//   },
+//   desc: {
+//     color: "purple",
+//     marginLeft: 12,
+//   },
+//   checkboxContainer: {
+//     display: "flex",
+//     flexDirection: "row",
+//     justifyContent: "center",
+//     marginTop: 20,
+//   },
+//   error: {
+//     color: "#7F848E",
+//     fontWeight: "bold",
+//     fontSize: 18,
+//   },
+//   reset: {
+//     color: "#ED33FF",
+//     fontWeight: "bold",
+//     fontSize: 24,
+//   },
+//   start: {
+//     color: "#337EFF",
+//     fontWeight: "bold",
+//     fontSize: 24,
+//   },
 
-  image: {
-    width: 150,
-    height: 150,
-    marginTop: 30,
-    alignSelf: "center",
-  },
+//   image: {
+//     width: 150,
+//     height: 150,
+//     marginTop: 30,
+//     alignSelf: "center",
+//   },
 
-  logOutContainer: {
-    flexDirection: "row-reserve",
-    alignItems: "flex-end",
-    padding: 16,
-  },
-});
+//   logOutContainer: {
+//     flexDirection: "row-reserve",
+//     alignItems: "flex-end",
+//     padding: 16,
+//   },
+// });

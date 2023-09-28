@@ -6,7 +6,8 @@ import {
   validateName,
   validateEmail,
   validatePhone,
-} from "../Utils/validation";
+} from "../Utils/Validation";
+import { startingStyles, colors } from "../Utils/Helper";
 
 export default function Starting({ start }) {
   const [userName, setUserName] = useState(""); // User enter name
@@ -20,7 +21,7 @@ export default function Starting({ start }) {
   const [phoneError, setPhoneError] = useState(""); //phoneError message
 
   const startHandler = () => {
-    setNameError("");
+    setNameError(""); // before validation, clear error messages
     setEmailError("");
     setPhoneError("");
     let isValid = true;
@@ -35,16 +36,19 @@ export default function Starting({ start }) {
     if (!validatePhone(userPhone)) {
       setPhoneError("Please enter a valid phone.");
       isValid = false;
-    }
+    } // if the input fields are not correct, set error messages
+
     if (!isValid) {
       return;
-    }
-    start({ userName, userEmail, userPhone });
-    setUserName("");
+    } // if the validation did not pass, return
+
+    start({ userName, userEmail, userPhone }); // validation passed, pass userdata to the App.js
+
+    setUserName(""); // after userdata is passed, set everything to initial state, so after "logout" everything is cleared
     setUserEmail("");
     setUserPhone("");
     setIsChecked(false);
-  }; // if the input fields are not correct, set error messages
+  };
 
   const resetHandler = () => {
     setUserName("");
@@ -59,42 +63,41 @@ export default function Starting({ start }) {
   return (
     <View>
       <Header />
-      <View style={styles.container}>
-        <Text style={styles.label}>Name</Text>
+      <View style={startingStyles.container}>
+        <Text style={startingStyles.label}>Name</Text>
         <TextInput
-          style={styles.input}
+          style={startingStyles.input}
           value={userName}
           onChangeText={setUserName}
         />
         {nameError && <Text>{nameError}</Text>}
+        {/* conditional rendering. if nameError is not empty, it will be rendered */}
 
-        <Text style={styles.label}>Email</Text>
+        <Text style={startingStyles.label}>Email</Text>
         <TextInput
-          style={styles.input}
+          style={startingStyles.input}
           value={userEmail}
           onChangeText={setUserEmail}
           keyboardType="email-address"
         />
         {emailError && <Text>{emailError}</Text>}
 
-        <Text style={styles.label}>Phone</Text>
+        <Text style={startingStyles.label}>Phone</Text>
         <TextInput
-          style={styles.input}
+          style={startingStyles.input}
           value={userPhone}
           onChangeText={setUserPhone}
           keyboardType="numeric"
         />
         {phoneError && <Text>{phoneError}</Text>}
 
-        <View style={styles.checkboxContainer}>
+        <View style={startingStyles.checkboxContainer}>
           <Checkbox value={isChecked} onValueChange={setIsChecked} />
           <Text
             style={[
-              styles.checkboxText,
+              startingStyles.checkboxText,
               {
                 marginVertical: 0,
-                // backgroundColor: "white",
-                // padding: 10,
                 margin: 5,
               },
             ]}
@@ -103,16 +106,16 @@ export default function Starting({ start }) {
           </Text>
         </View>
 
-        <View style={styles.buttonContainer}>
-          <View style={styles.reset}>
+        <View style={startingStyles.buttonContainer}>
+          <View style={startingStyles.reset}>
             <Button title="Reset" onPress={resetHandler} color="red" />
           </View>
-          <View style={styles.start}>
+          <View style={startingStyles.start}>
             <Button
               title="Start"
               onPress={startHandler}
-              disabled={!isChecked}
-              color={isChecked ? "blue" : "white"}
+              disabled={!isChecked} // if the checkbox is not checked, the start button is disabled
+              color={isChecked ? colors.blue : colors.white} // if the checkbox is not checked, the start button is white, otherwise it is blue
             />
           </View>
         </View>
@@ -120,77 +123,3 @@ export default function Starting({ start }) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  label: {
-    // marginTop: 20,
-    color: "purple",
-    fontSize: 30,
-    marginVertical: 15,
-  },
-
-  input: {
-    color: "#6B0F4D",
-    borderBottomColor: "#6B0F4D",
-    borderBottomWidth: 3,
-    width: 300,
-    // alignSelf: 'center',
-    fontSize: 20,
-    textAlign: "center",
-    paddingBottom: 5,
-    fontWeight: "bold",
-  },
-
-  buttonContainer: {
-    // width: "100%",
-    // flexDirection: "row",
-    // alignItems: "center",
-    // // justifyContent: "space-between",
-    // padding: 20,
-
-    // display: "flex",
-    // flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-around",
-    padding: 30,
-  },
-
-  container: {
-    width: "90%", // Set the width to take 80% of the screen width
-    height: 500,
-    backgroundColor: "#808080", // Set the background color to grey
-    padding: 20, // Add some padding to the content inside the container
-    // alignItems: "flex-start", // Align content to the left
-    // justifyContent: "flex-start",
-    marginTop: 20,
-    shadowColor: "#000000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 6,
-    borderRadius: 15,
-  },
-
-  checkboxContainer: {
-    // display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 20,
-  },
-
-  checkboxText: {
-    color: "purple",
-    fontSize: 15,
-    marginVertical: 8,
-  },
-
-  reset: {
-    fontWeight: "bold",
-    fontSize: 30,
-  },
-
-  start: {
-    fontWeight: "bold",
-    fontSize: 30,
-  },
-});

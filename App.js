@@ -2,9 +2,9 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import Starting from "./screens/Starting";
 import { useState } from "react";
-import { validateName, validateEmail, validatePhone } from "./Utils/validation";
+import { validateName, validateEmail, validatePhone } from "./Utils/Validation";
 import Confirm from "./screens/Confirm";
-import { colors } from "./Utils/styles";
+import { colors } from "./Utils/Helper";
 import Header from "./components/Header";
 import Game from "./screens/Game";
 import { LinearGradient } from "expo-linear-gradient";
@@ -56,7 +56,7 @@ export default function App() {
 
   return (
     <LinearGradient
-      colors={["#add8e6", "#d8bfd8"]} // Blue to Purple gradient
+      colors={[colors.lightBlue, colors.lightPurple]} // Blue to Purple gradient
       style={styles.gradient}
     >
       <View
@@ -97,7 +97,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
