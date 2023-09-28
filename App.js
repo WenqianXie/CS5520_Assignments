@@ -2,10 +2,10 @@ import { View } from "react-native";
 import Starting from "./screens/Starting";
 import { useState } from "react";
 import Confirm from "./screens/Confirm";
-import { colors } from "./utils/Helper";
+import { colors } from "./addition/Helper";
 import Game from "./screens/Game";
 import { LinearGradient } from "expo-linear-gradient";
-import { appStyles } from "./utils/Helper";
+import { appStyles } from "./addition/Helper";
 //this is app.js, main entry point
 
 export default function App() {

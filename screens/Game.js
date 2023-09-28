@@ -7,7 +7,7 @@ import {
   SafeAreaView,
 } from "react-native";
 import React, { useState } from "react";
-import { gameStyles } from "../utils/Helper";
+import { gameStyles } from "../addition/Helper";
 // this the game screen that user can input their guess number, and will show result to the user
 
 export default function Game({ logOutToStart }) {
