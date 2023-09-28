@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet } from "react-native";
-import React from "react";
+import { StyleSheet } from "react-native";
+// This is a helper file that stores common styles and colors
 
 export const colors = {
   blue: "#0000FF",
@@ -8,14 +8,14 @@ export const colors = {
   ivory: "#fffff0",
   red: "#ff0000",
   black: "#000000",
+  lightYellow: "#ffebcd",
   lightBlue: "#6495ed",
-  lightPurple: "#dda0dd",
 };
 
 export const headerStyles = StyleSheet.create({
   header: {
-    padding: 55,
-    marginBottom: 10,
+    marginTop: 10,
+    padding: 50,
   },
 
   headerText: {
@@ -54,19 +54,17 @@ export const startingStyles = StyleSheet.create({
   container: {
     width: "90%",
     height: 500,
-    backgroundColor: "#fffff0",
-    padding: 20, // Add some padding to the content inside the container
-    // marginTop: 10,
-    shadowColor: "#000000",
-    shadowOpacity: 0.5,
+    backgroundColor: colors.ivory,
+    padding: 25,
+    shadowColor: colors.black,
+    shadowOpacity: 0.75,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 10,
     borderRadius: 20,
-    elevation: 30,
+    elevation: 50,
   },
 
   checkboxContainer: {
-    // display: "flex",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
@@ -116,7 +114,7 @@ export const confirmStyles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 10,
     borderRadius: 20,
-    elevation: 30,
+    elevation: 50,
     padding: 15,
   },
 
@@ -145,7 +143,7 @@ export const confirmStyles = StyleSheet.create({
     fontSize: 24,
     marginRight: 30,
   },
-  continue: { color: "#337EFF", fontWeight: "bold", fontSize: 24 },
+  continue: { color: colors.blue, fontWeight: "bold", fontSize: 24 },
 });
 
 export const gameStyles = StyleSheet.create({
@@ -153,15 +151,14 @@ export const gameStyles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
-    shadowColor: colors.black,
-    shadowRadius: 6,
-    borderRadius: 15,
   },
 
   userContainer: {
     width: "100%",
     height: 300,
     backgroundColor: colors.ivory,
+    shadowColor: colors.black,
+    shadowOpacity: 0.5,
     marginTop: 20,
     padding: 20,
     shadowOffset: {
@@ -170,6 +167,7 @@ export const gameStyles = StyleSheet.create({
     },
     shadowRadius: 10,
     borderRadius: 20,
+    elevation: 50,
   },
 
   enterNumber: {
@@ -190,11 +188,6 @@ export const gameStyles = StyleSheet.create({
     textAlign: "center",
   },
 
-  desc: {
-    color: colors.purple,
-    marginLeft: 12,
-  },
-
   input: {
     color: colors.purple,
     borderBottomColor: colors.purple,
@@ -213,18 +206,6 @@ export const gameStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
     padding: 20,
-  },
-
-  logOut: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-around",
-  },
-
-  desc: {
-    color: colors.purple,
-    marginLeft: 12,
   },
 
   reset: {
@@ -250,5 +231,20 @@ export const gameStyles = StyleSheet.create({
     flexDirection: "row-reserve",
     alignItems: "flex-end",
     padding: 16,
+  },
+});
+
+export const appStyles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  gameContainer: {
+    flex: 1,
+  },
+
+  gradient: {
+    flex: 1,
   },
 });

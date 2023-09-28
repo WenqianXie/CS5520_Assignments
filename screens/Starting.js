@@ -1,4 +1,4 @@
-import { View, Text, TextInput, StyleSheet, Button } from "react-native";
+import { View, Text, TextInput, Button } from "react-native";
 import { useState } from "react";
 import Checkbox from "expo-checkbox";
 import Header from "../components/Header";
@@ -8,6 +8,7 @@ import {
   validatePhone,
 } from "../Utils/Validation";
 import { startingStyles, colors } from "../Utils/Helper";
+// this is the starting screen for the user to input the name, email and phone, validate them and show error messages
 
 export default function Starting({ start }) {
   const [userName, setUserName] = useState(""); // User enter name
@@ -97,8 +98,7 @@ export default function Starting({ start }) {
             style={[
               startingStyles.checkboxText,
               {
-                marginVertical: 0,
-                margin: 5,
+                margin: 10, // make a little space for the checkbox and text
               },
             ]}
           >

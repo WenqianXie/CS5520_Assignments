@@ -1,6 +1,7 @@
-import { View, Text, Modal, StyleSheet, Button } from "react-native";
+import { View, Text, Modal, Button } from "react-native";
 import React from "react";
 import { confirmStyles } from "../Utils/Helper";
+// this is a modal that shows the user data, user can choose to go back to sign up or continue to game
 
 export default function Confirm({
   userData,
@@ -45,59 +46,3 @@ export default function Confirm({
     </Modal>
   );
 }
-
-// const styles = StyleSheet.create({
-//   buttonContainer: {
-//     display: "flex",
-//     flex: 1,
-//     flexDirection: "row",
-//     alignItems: "center",
-//     justifyContent: "space-around",
-//   },
-//   centeredView: {
-//     display: "flex",
-//     flexDirection: "row",
-//     justifyContent: "center",
-//     alignItems: "center",
-//     flex: 1,
-//   },
-//   modalView: {
-//     display: "flex",
-//     flex: 1,
-//     margin: 20,
-//     backgroundColor: "#D3D3D3",
-//     borderRadius: 20,
-//     padding: 15,
-//     shadowColor: "#000",
-//     shadowOffset: {
-//       width: 0,
-//       height: 2,
-//     },
-//     shadowOpacity: 0.25,
-//     shadowRadius: 4,
-//     elevation: 5,
-//   },
-//   textStyle: {
-//     textAlign: "left",
-//     fontSize: 24,
-//     color: "blue",
-//   },
-//   textInfoStyle: {
-//     textAlign: "left",
-//     fontSize: 24,
-//     color: "#6B0F4D",
-//     fontWeight: "bold",
-//   },
-//   modalButton: {
-//     display: "flex",
-//     flexDirection: "row",
-//     justifyContent: "center",
-//   },
-//   goBack: {
-//     color: "#ED33FF",
-//     fontWeight: "bold",
-//     fontSize: 24,
-//     marginRight: 30,
-//   },
-//   continue: { color: "#337EFF", fontWeight: "bold", fontSize: 24 },
-// });

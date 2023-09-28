@@ -1,7 +1,6 @@
 import {
   View,
   Text,
-  StyleSheet,
   TextInput,
   Button,
   Image,
@@ -9,29 +8,29 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { gameStyles } from "../Utils/Helper";
+// this the game screen that user can input their guess number, and will show result to the user
 
-export default function Game({ reset, logOutToStart }) {
+export default function Game({ logOutToStart }) {
   function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+  } // function to generate a random integer between 10 and 20
 
   const [enteredNumber, setEnteredNumber] = useState("");
   const [guessNumber, setGuessNumber] = useState(getRandomInt(10, 20));
-  console.log(guessNumber);
+  //console.log(guessNumber); //this is to show in the console what the guess number is
   const [guessCount, setGuessCount] = useState(0);
   const [stage, setStage] = useState("guess");
 
   const resetHandler = () => {
     setEnteredNumber("");
-  };
+  }; // reset is clicked to erase the user input
 
   const logOutHandler = () => {
-    setEnteredNumber("");
-    reset();
     logOutToStart();
-  };
+    newGameHandler();
+  }; // once user hit log out, the screen will switch to "start" and new game data will be created
 
   const confirmHandler = () => {
     const userGuess = parseInt(enteredNumber);
@@ -40,7 +39,7 @@ export default function Game({ reset, logOutToStart }) {
     } else {
       setGuessCount(guessCount + 1);
       setStage("failure");
-    }
+    } // compare user input number and guess number, if equal switch to sucess stage, otherwise failure stage, and guess count should + 1
   };
 
   const newGameHandler = () => {
@@ -48,12 +47,12 @@ export default function Game({ reset, logOutToStart }) {
     setEnteredNumber("");
     setGuessCount(0);
     setStage("guess");
-  };
+  }; // new game generates a new random integer between 10 and 20, set the user input to initial state, guess count to 0, and switch stage to "guess"
 
   const tryAgainHandler = () => {
     setStage("guess");
     setEnteredNumber("");
-  };
+  }; // try again will erase the user input and switch to guess stage, but the guess number will not be changed
 
   return (
     <SafeAreaView>
@@ -64,6 +63,7 @@ export default function Game({ reset, logOutToStart }) {
         style={[
           gameStyles.container,
           { display: stage === "guess" ? "flex" : "none" },
+          // conditional rendering, if the stage is guess, show this screen, otherwise be invisible to user
         ]}
       >
         <Text style={gameStyles.label}>Guess A Number Between 10 & 20</Text>
@@ -72,7 +72,7 @@ export default function Game({ reset, logOutToStart }) {
           <TextInput
             style={gameStyles.input}
             value={enteredNumber}
-            onChangeText={(text) => setEnteredNumber(text)}
+            onChangeText={(text) => setEnteredNumber(text)} // set user input to enered number
           />
           <View style={gameStyles.buttonContainer}>
             <Button title="Reset" onPress={resetHandler} color="red" />
@@ -95,6 +95,7 @@ export default function Game({ reset, logOutToStart }) {
           <Image
             source={{
               uri: `https://picsum.photos/id/${guessNumber}/100/100`,
+              // replace 14 with guess number, so different guess number will show different image
             }}
             style={gameStyles.image}
           ></Image>
@@ -113,7 +114,7 @@ export default function Game({ reset, logOutToStart }) {
         <View style={gameStyles.userContainer}>
           <Text style={gameStyles.label}>You didn't guess correct!</Text>
           <Image
-            source={require("../assets/wrongGuess.jpg")}
+            source={require("../assets/wrongGuess.jpg")} // use require to get image, it is stored in assets
             style={gameStyles.image}
           />
           <View style={gameStyles.buttonContainer}>
@@ -124,112 +125,3 @@ export default function Game({ reset, logOutToStart }) {
     </SafeAreaView>
   );
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     justifyContent: "center",
-//     alignItems: "center",
-//     padding: 20,
-//     shadowColor: "#000000",
-//     shadowRadius: 6,
-//     borderRadius: 15,
-
-//     // marginTop: 40, // Add some padding to the content inside the container
-//   },
-//   userContainer: {
-//     width: "100%", // Set the width to take 80% of the screen width
-//     height: 400,
-//     backgroundColor: "#CCCCCC", // Set the background color to grey
-//     marginTop: 20,
-//     padding: 20, // Add some padding to the content inside the container
-//     shadowOffset: {
-//       width: 0,
-//       height: 2,
-//     },
-//     shadowRadius: 6,
-//     borderRadius: 20,
-//   },
-//   enterNumber: {
-//     marginTop: 20,
-//     color: "blue",
-//     fontSize: 24,
-//     marginVertical: 8,
-//     fontWeight: "bold",
-//     textAlign: "center",
-//   },
-//   label: {
-//     marginTop: 30,
-//     color: "blue",
-//     fontSize: 24,
-//     marginVertical: 8,
-//     fontWeight: "bold",
-//     textAlign: "center",
-//   },
-//   desc: {
-//     color: "purple",
-//     marginLeft: 12,
-//   },
-//   input: {
-//     color: "#6B0F4D",
-//     borderBottomColor: "#6B0F4D",
-//     borderBottomWidth: 5,
-//     width: 100,
-//     alignSelf: "center",
-//     fontSize: 20,
-//     textAlign: "center",
-//     paddingBottom: 10,
-//     fontWeight: "bold",
-//     marginTop: 20,
-//   },
-//   buttonContainer: {
-//     //   display: "flex",
-//     flexDirection: "row",
-//     alignItems: "center",
-//     justifyContent: "space-around",
-//     padding: 20,
-//   },
-//   logOut: {
-//     flex: 1,
-//     flexDirection: "row",
-//     alignItems: "center",
-//     justifyContent: "space-around",
-//   },
-//   desc: {
-//     color: "purple",
-//     marginLeft: 12,
-//   },
-//   checkboxContainer: {
-//     display: "flex",
-//     flexDirection: "row",
-//     justifyContent: "center",
-//     marginTop: 20,
-//   },
-//   error: {
-//     color: "#7F848E",
-//     fontWeight: "bold",
-//     fontSize: 18,
-//   },
-//   reset: {
-//     color: "#ED33FF",
-//     fontWeight: "bold",
-//     fontSize: 24,
-//   },
-//   start: {
-//     color: "#337EFF",
-//     fontWeight: "bold",
-//     fontSize: 24,
-//   },
-
-//   image: {
-//     width: 150,
-//     height: 150,
-//     marginTop: 30,
-//     alignSelf: "center",
-//   },
-
-//   logOutContainer: {
-//     flexDirection: "row-reserve",
-//     alignItems: "flex-end",
-//     padding: 16,
-//   },
-// });
